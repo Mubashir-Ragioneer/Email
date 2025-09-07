@@ -1,0 +1,106 @@
+<!-- app/templates/fixed_card.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <title>{{ subject or (brand ~ " Update") }}</title>
+</head>
+<body style="margin:0;background:#f5f7fb;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fb;">
+    <tr>
+      <td align="center" style="padding:24px;">
+        <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;">
+          {% if logo_url %}
+          <tr>
+            <td style="text-align:center;padding:24px 24px 0;">
+              <img src="{{ logo_url }}" alt="{{ brand }}" width="64" height="64" style="display:block;margin:0 auto 8px;">
+            </td>
+          </tr>
+          {% endif %}
+
+          <tr>
+            <td style="padding:0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background:linear-gradient(90deg,#3aa0ff,#4666ff);padding:28px 24px;text-align:center;color:#ffffff;">
+                    <h1 style="margin:0;font-family:Inter,Arial,sans-serif;font-size:24px;">
+                      {{ title or "Welcome Aboard! 👋" }}
+                    </h1>
+                    {% if subtitle %}
+                    <p style="margin:8px 0 0;font-family:Inter,Arial,sans-serif;font-size:14px;opacity:.9;">
+                      {{ subtitle }}
+                    </p>
+                    {% endif %}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:24px 24px 8px;font-family:Inter,Arial,sans-serif;color:#111827;font-size:16px;">
+              {% if greeting %}
+                <p style="margin:0 0 12px;">{{ greeting }}</p>
+              {% endif %}
+
+              {# OTP block (optional) #}
+              {% if code %}
+                <p style="margin:0 0 12px;">Here’s your secure code:</p>
+                <div style="font-size:36px;letter-spacing:8px;font-weight:700;text-align:center;margin:16px 0 8px;">
+                  {{ code }}
+                </div>
+                {% if expires_minutes %}
+                <p style="margin:0;color:#6b7280;font-size:13px;text-align:center;">
+                  This code expires in {{ expires_minutes }} minute{{ 's' if expires_minutes != 1 else '' }}.
+                </p>
+                {% endif %}
+              {% endif %}
+
+              {# Main content either as raw HTML or paragraphs list #}
+              {% if body_html %}
+                <div style="margin-top:12px;line-height:1.6;">{{ body_html | safe }}</div>
+              {% elif paragraphs %}
+                {% for p in paragraphs %}
+                  <p style="margin:12px 0;line-height:1.6;">{{ p }}</p>
+                {% endfor %}
+              {% endif %}
+
+              {# Optional bullet list #}
+              {% if bullets %}
+                <ul style="margin:8px 0 0 18px;padding:0;">
+                  {% for b in bullets %}
+                    <li style="margin:6px 0;">{{ b }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              {# Optional CTA button #}
+              {% if cta_url and cta_label %}
+                <div style="text-align:center;margin:20px 0 8px;">
+                  <a href="{{ cta_url }}"
+                     style="display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;
+                            background:#4666ff;color:#ffffff;font-weight:600;">
+                    {{ cta_label }}
+                  </a>
+                </div>
+              {% endif %}
+            </td>
+          </tr>
+
+          {% if footer_note %}
+          <tr>
+            <td style="padding:0 24px 16px;text-align:center;color:#6b7280;font-size:12px;font-family:Inter,Arial,sans-serif;">
+              {{ footer_note }}
+            </td>
+          </tr>
+          {% endif %}
+        </table>
+
+        <div style="height:24px"></div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

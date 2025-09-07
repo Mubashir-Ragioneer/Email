@@ -1,0 +1,13 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic-settings==2.5.2
+mongoengine==0.29.1
+pydantic==2.11.7
+
+# email templating + Gmail API
+jinja2==3.1.4
+google-api-python-client==2.142.0
+google-auth-oauthlib==1.2.1
+google-auth-httplib2==0.2.0
+
+azure-functions==1.21.3
