@@ -36,7 +36,7 @@ venv.bak/
 .env.production.local
 
 # IDE
-.vscode/
+
 .idea/
 *.swp
 *.swo
@@ -88,3 +88,4 @@ data/
 secrets/client_secret.json
 secrets/token.json
 host.json
+.python_packages
